@@ -4,17 +4,53 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  background-color: var(--white);
+  min-height: 100vh;
+}
+
+.wrapper {
+  max-width: 1300px;
+  margin: auto;
+}
+
+.opacity-8 {
+  opacity: 0.8;
+}
+
+button {
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+  cursor: pointer;
 }
 
 input[hidden] {
   display: none !important;
 }
 
+input,
+select {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: var(--white);
+}
+
 label {
   display: block;
   width: max-content;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  font-size: 1.1rem;
   padding: 0;
+  cursor: pointer;
 }
 
 textarea {

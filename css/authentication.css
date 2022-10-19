@@ -1,90 +1,58 @@
-.main {
-  width: 350px;
-  height: 500px;
-  background: red;
-  overflow: hidden;
-  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
-    no-repeat center/ cover;
-  border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
+.patientSignupForm {
+  min-width: 640px;
+  background: var(--brand-400);
+  border-radius: 0.5rem;
+  padding: 0.5rem 4rem;
+  padding-top: 4rem;
 }
 
-#chk {
-  display: none;
+.signupTitle {
+  margin-left: 0;
+  margin-bottom: 3rem;
+  color: var(--white);
+  font-size: 2rem;
 }
 
 .fields {
-  width: 80%;
   margin: auto;
 }
 
-label {
-  color: #f4f4f4;
+.fields label {
+  color: var(--white);
 }
 
-.signin {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.shake {
+  display: block;
+  animation: shake 0.5s ease-in-out;
 }
 
-.signinTitle,
-.signupTitle {
-  color: #fff;
-  font-size: 2.3em;
-  justify-content: center;
-  display: flex;
-  margin: 48px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-}
-
- input {
-  width: 100%;
-  background: #e0dede;
-  justify-content: center;
-  display: flex;
-  margin: 0.25rem auto 1rem auto;
-  padding: 0.5rem 0.75rem;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-} 
-
-#tab2-1, #tab2-2{
-  padding: 0px;
-}
-
-/* .signup {
-  background: #eee;
-  border-radius: 60% / 10%;
-  transform: translateY(-180px);
-  transition: 0.8s ease-in-out;
-}
-
-.signup label {
-  color: #573b8a;
-  padding-top: 1.8rem;
-  transform: scale(0.6);
-}
-
-#chk:checked ~ .signup {
-  transform: translateY(-500px);
-}
-
-#chk:checked ~ .signup label {
-  transform: scale(1);
-  padding-top: 3rem;
-}
-
-#chk:checked ~ .signin label {
-  transform: scale(0.6);
-} */
-
-
-
-[data-message]::after{
+[data-message]::after {
   content: attr(data-message);
-  color: red;
+  display: block;
+  max-width: 480px;
+  margin: 0.25rem;
+  text-align: center;
+  color: var(--white);
+  opacity: 0.8;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(30px);
+  }
+  20% {
+    transform: translateX(-30px);
+  }
+  40% {
+    transform: translateX(15px);
+  }
+  60% {
+    transform: translateX(-15px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
