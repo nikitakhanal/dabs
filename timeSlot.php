@@ -52,19 +52,53 @@
             // echo $timeSlot." ";
             array_push($slots, $timeSlot);
         }
+    }   
+        $token =  array();
+        $i=1;
+        foreach($slots as $slot){
+            $token[$slot]=$i;
+            $i++;
+        }
+        return($token); //returns array of slots
     }
-        return($slots); //returns array of slots
-    }
-?>
 
-<!--  $time = getTime("07:30-13:30");
-echo $time;
-$slots = getSlots($time); // array of slots
-// print_r($slots);
+//yaa dekhi tala hernu parne cha...
+
+//{{{{ $time = getTime("07:30-13:30");
+//     echo $time;
+//     echo("<br/>");
+
+//     $token = getSlots($time); // array of slots
+//     print_r($token);
+//     echo("<br/>"); }}}}
+
+// function getSlotsAndToken(){
     
+//     $time = getTime("07:30-13:30");
+//     echo $time;
+//     echo("<br/>");
+
+//     $slots = getSlots($time); // array of slots
+//     print_r($slots);
+//     echo("<br/>");
+    
+//     $token =  array();
+//     $i=1;
+//     foreach($slots as $slot){
+//         $token[$slot]=$i;
+//         $i++;
+//     }
+//     return $token;
+// }
+
+// print_r(getSlotsAndToken());
+// echo(count($slots));
+// echo(" ");
+// echo(count($token));
+?>  
 
 
-
+<!--  
 
 echo "<label for=\"slot\">Available Time Slot</label>
                 <select name=\"slotId\" id=\"slot\">
