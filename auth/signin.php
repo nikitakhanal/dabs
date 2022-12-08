@@ -1,10 +1,11 @@
+
 <?php
 session_start();
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
 
-if (!isset($_POST["patientSigninDetails"])) {
+if (!isset($_POST["signinDetails"])) {
     die($errorMessages["emptyData"]);
 }
 
@@ -33,8 +34,15 @@ if($numRows>0){
     $_SESSION['firstName']= $row['firstName'];
     $_SESSION['email']= $email;
     $_SESSION['role']= $row['role'];
+
+    if($row['role'] == "admin"){
+        header('Location: /dabs/views/adminDashboard.php');
+        // exit();
+    }else if($row['role'] == "patient")
     header('Location: /dabs/views/dashboard.php');
     exit();
+}else{
+    echo'<script>alert("Incorrect username or password, try again"); document.location="../views/patientSignin.php"</script>';
 }
 
 mysqli_close($conn);

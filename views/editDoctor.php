@@ -1,5 +1,8 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
+// include(dirname(__DIR__).'/includes/header.php');
+include('../includes/header.php');
+
 session_start();
 if(count($_SESSION)==0){
     header('Location: /dabs/admin.php');
@@ -29,13 +32,14 @@ if($numRows > 0){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Doctor's Appoint Booking Management System</title>
-	<link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,500,700&display=swap" rel="stylesheet">
+	<title>Update Doctor</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../css/styles.css"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,500,700&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-    <div class="signup">
-				<form action="../admin/updateDoctor.php" method="POST">
+    
+    <div class="wrapper signup">
+				<form action="../dabs/admin/updateDoctor.php" method="POST" class="signupForm">
 					<label class="signupTitle" for="chk" aria-hidden="true">Update</label>
 
 					<div class="fields multiStepForm">
@@ -110,6 +114,11 @@ if($numRows > 0){
                                 <option value="DM" <?php if($doctorDetails['degree'] == "DM") echo "selected"?>>DM</option>
                                 <option value="DNB" <?php if($doctorDetails['degree'] == "DNB") echo "selected"?>>DNB</option>
                             </select>
+                            <br/>
+                            <br/>
+
+                            <label for="nmcNo">NMC No</label>
+                            <input type="text" id="nmcNo" name="nmcNo" placeholder="" value="<?php echo $doctorDetails['nmcNo']; ?>" required>
                             <br/>
                             <br/>
 

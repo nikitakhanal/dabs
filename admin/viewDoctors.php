@@ -1,11 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Doctor</title>
+</head>
+<body>
+    
+</body>
+</html>
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
 include(dirname(__DIR__)."/includes/header.php");
-include(dirname(__DIR__)."/includes/adminHeader.php");
-include (dirname(__DIR__).'/includes/adminAuthentication');
+// include(dirname(__DIR__)."/includes/adminHeader.php");
+include (dirname(__DIR__).'/includes/adminAuthentication.php');
 ?>
 
 <html>
+<body class="dashboard">  
 <h2 class= "tableTitle">Doctor Details</h2>
     <table>
         <tr>
@@ -17,6 +30,7 @@ include (dirname(__DIR__).'/includes/adminAuthentication');
         <th>Degree</th>
         <th>Available Time</th>
         <th>Status</th>
+        <th>NMC No</th>
         <th>Action</th>
         </tr>
 
@@ -37,11 +51,12 @@ if($numRows > 0){
 			echo "<td>".$row['specialization']."</td>";
 			echo "<td>".$row['degree']."</td>";
 			echo "<td>".$row['availabilityTime']."</td>";
-            echo "<td>".$row['status']."</td>";								
+            echo "<td>".$row['status']."</td>";		
+            echo "<td>".$row['nmcNo']."</td>";								
 			// echo "<td>".$row['fee']."</td>";3
             $doctorId = $row['doctorId'];
             echo "<td> 
-            <form action=\"../views/editDoctor.php\">
+            <form action=\"../dabs/views/editDoctor.php\" method=\"GET\">
                 <input type=\"hidden\" name=\"doctorId\" value=\"$doctorId\" /> 
                 <input type=\"submit\" name=\"doctorUpdateDetails\" value=\"Update\" />
             </form>
@@ -53,3 +68,5 @@ if($numRows > 0){
     <!-- echo "<td><input hidden type='number' name='doctorId' " -->
     
 </table>
+</body>
+</html>

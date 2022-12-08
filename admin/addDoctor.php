@@ -6,7 +6,7 @@ include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
 include(dirname(__DIR__)."/includes/header.php");
 include(dirname(__DIR__)."/timeSlot.php");
-include (dirname(__DIR__).'/includes/adminAuthentication');
+include (dirname(__DIR__).'/includes/adminAuthentication.php');
 
 $errors = array();
 
@@ -155,6 +155,7 @@ if (count($errors) > 0) {
 }
 else{
     print_r($doctorDetails);
+    // exit();
 }
 
 //RUN using insert queries
@@ -174,6 +175,7 @@ $password= $doctorDetails['password'];
 $hashedPassword = md5($password);
 $status= "active";
 $role= "doctor";
+$nmcNo= $doctorDetails['nmcNo'];
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
 $sql1 = "INSERT INTO user (firstName, middleName, lastName, email, password, bloodGroup, dob, gender, maritalStatus, role, photo) VALUES ('$firstName',
@@ -190,11 +192,12 @@ if($affectedRows1>0){
         $row=mysqli_fetch_assoc($resultSet2);
         $userId= $row['userId'];
 
-        $sql3 = "INSERT INTO doctor (userId, specialization, degree, availabilityTime, status) VALUES ('$userId',
-        '$specialization', '$degree', '$availabilityTime', '$status');";
+        $sql3 = "INSERT INTO doctor (userId, specialization, degree, availabilityTime, nmcNo, status) VALUES ('$userId',
+        '$specialization', '$degree', '$availabilityTime', '$nmcNo', '$status');";
         $resultSet3= mysqli_query($conn, $sql3);
         $affectedRows3= mysqli_affected_rows($conn);
         if($affectedRows3 > 0){
+            // if($resultSet3){
             echo " Successfully Inserted Into doctor";
             // exit();
             //to select availability time of currently inserted doctor
@@ -220,14 +223,21 @@ if($affectedRows1>0){
                     
                     $time = getTime($availabilityTime);
                     $slots = getSlots($time); // array of slots
-                    
+                    $slots = array_keys($slots);
+                    // print_r($slots);
+                    // exit();
+
                     $slots=  json_encode($slots);
                     $insertTimeSlot = "INSERT INTO doctorschedule (doctorId, slots) VALUES ('$doctorId', '$slots');";
                     $resultSet= mysqli_query($conn, $insertTimeSlot);
                     $affectedRows= mysqli_affected_rows($conn);
                     if($affectedRows > 0){
-                       echo " Successfully Inserted Into doctorschedule";                      
+                    // echo " Successfully Inserted Into doctorschedule";        
+                    echo'\"Doctor added successfully\"<script>document.location="../dabs/admin/viewDoctors.php"</script>';
                     }
+                    // else{
+                    // echo'<script>alert("Incorrect username or password, try again"); document.location="../views/patientSignin.php"</script>';
+                    // }
 
             
                 }

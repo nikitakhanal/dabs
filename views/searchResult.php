@@ -2,9 +2,9 @@
 include(dirname(__DIR__).'/includes/connection.php');
 
     $value = $_GET['search'];
-    // echo $value;
+    echo $value;
 
-    $sql = "SELECT * FROM user WHERE firstName, middleName, lastName LIKE '%a%';";
+    $sql = "SELECT * FROM appointment WHERE firstName, middleName, lastName LIKE '%$value%';";
     $resultSet1 = mysqli_query($conn, $sql);
           $numRows1 = mysqli_num_rows($resultSet1);
           if($numRows1 > 0){

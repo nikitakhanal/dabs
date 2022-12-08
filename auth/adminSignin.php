@@ -28,14 +28,17 @@ if (!$isEmailValid) {
 
 $sql= "SELECT * FROM user WHERE email='$email' AND password='$hashedPassword'";
 $resultSet= mysqli_query($conn, $sql);
-$numRows= mysqli_num_rows($resultSet);
-if($numRows>0){
+// $numRows= mysqli_num_rows($resultSet);
+// if($numRows>0){
+if($resultSet){
     $row = mysqli_fetch_assoc($resultSet);
     // $_SESSION['firstName']= $row['firstName'];
     // $_SESSION['email']= $email;
     $_SESSION['role']= $row['role'];
     header('Location: /dabs/views/adminDashboard.php');
     exit();
+}else{
+    echo'<script>alert("Incorrect email or password, try again"); document.location="../admin.php"</script>';
 }
 
 mysqli_close($conn);

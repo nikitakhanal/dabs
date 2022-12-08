@@ -1,27 +1,31 @@
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
-include(dirname(__DIR__)."/includes/header.php");
+include(dirname(__DIR__).'/includes/header.php');
 include (dirname(__DIR__).'/includes/adminAuthentication.php');
 ?>
 
 <title>Admin Dashboard</title>
 </head>
-<body>
+<body class="dashboard">
 
 <nav>
-  <a href="../logout.php">Log Out</a>
-  <a href="#profile">Profile</a>  
-  <a href="../admin/viewDoctors.php">View Doctor</a>
-  <a href="addDoctor.php">Add Doctor</a>
+  <a href="../dabs/views/addDoctor.php">Add Doctor</a>
+  <a href="../dabs/admin/viewDoctors.php">View Doctor</a>
+  <a href="../dabs/views/adminDashboard.php">View Appointment</a>
+  <a href="../dabs/logout.php">Log Out</a>
+  
+  <!-- <a href="#profile">Profile</a>   -->
 </nav>
 
 
-<h1>Admin's Dashboard</h1>
+<h1 class="patientName">Admin's Dashboard</h1>
 
-<form action="searchResult.php" method="GET">
-    <input class="searchField" type="text" name="search" placeholder="search"/>
-    <input class="searchFieldLabel" type="submit" value="search" name="submit" />
-</form>
+<div class="search">
+  <form action="views/searchResult.php" method="GET">
+      <input class="searchField" type="text" name="search" placeholder="search"/>
+      <input class="searchFieldLabel" type="submit" value="search" name="submit" />
+  </form>
+</div>
 
 <h2 class="tableTitle">Appointments</h2>
     <table>
@@ -82,15 +86,15 @@ if($numRows > 0){
         echo "<td>".$row['status']."</td>";         
         // echo "<td>".$row['fee']."</td>";
         echo "<td> 
-            <form action=\"../admin/updateAppointmentStatus.php\">
+            <form action=\"../dabs/admin/updateAppointmentStatus.php\">
               <input type='hidden' name='appointmentId' value='$appointmentId' >
               <input type='hidden' name='appointmentStatus' value='$appointmentStatus' >";
                 if($appointmentStatus != "Pending" ){
-                  echo "<button type='submit' name='submit' value='approve' style='color:#000;' disabled>Approve</button>
-                  <button type='submit' name='submit' value='decline' style='color:#000;' disabled>Decline</button>";
+                  echo "<button type='submit' name='submit' value='approve' class='appointmentStatus' disabled>Approve</button>
+                  <button type='submit' name='submit' value='decline' class='appointmentStatus' disabled>Decline</button>";
                 } else{
-                  echo "<button type='submit' name='submit' value='approve' style='color:#000;'>Approve</button>
-                  <button type='submit' name='submit' value='decline' style='color:#000;'>Decline</button>";
+                  echo "<button type='submit' name='submit' value='approve'  class='appointmentStatus'>Approve</button>
+                  <button type='submit' name='submit' value='decline' class='appointmentStatus''>Decline</button>";
                 }
        echo "</form>
             </td>";	

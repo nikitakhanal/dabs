@@ -27,7 +27,7 @@ include(dirname(__DIR__) . "/includes/connection.php");
 
             $today = date('Y-m-d');                                                                     
 
-            $onLeave = in_array($today, $leaves);
+            // $onLeave = in_array($today, $leaves);
         }
         
         if(!$onLeave){

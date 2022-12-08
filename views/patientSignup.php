@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../includes/header.php');
 ?>
 </head>
@@ -76,7 +77,7 @@ include('../includes/header.php');
             <small class="message" data-message=""></small>
 
             <label for="telephone">Telephone</label>
-            <input type="tel" id="telephone" name="telephone" value="telephone" required />
+            <input type="tel" id="telephone" name="telephone" value="telephone" maxlength="10" required />
             <small class="message" data-message=""></small>
           </div>
         </div>
@@ -106,7 +107,7 @@ include('../includes/header.php');
         password,
         address,
         telephone
-      } = form;
+      } = form; // form object ko values firstName, middleName ... maa haaleko
 
       const formFields = {
         firstName,
@@ -120,7 +121,7 @@ include('../includes/header.php');
         password,
         address,
         telephone
-      }
+      } 
 
       const data = {};
 
@@ -156,6 +157,7 @@ include('../includes/header.php');
           messageElement.classList.remove("shake");
         }
       }
+      
     })
   </script>
 </body>

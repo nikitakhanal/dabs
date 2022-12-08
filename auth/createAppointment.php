@@ -4,6 +4,7 @@ include('../constants/db.php');
 include('../constants/enums.php');
 include('../constants/regex.php');
 include('../constants/validation.php');
+include(dirname(__DIR__) . "/timeSlot.php");
 // include('../fetchTimeSlot.php');
 
 session_start();
@@ -76,9 +77,9 @@ if (count($errors) > 0) {
     print_r($errors);
     exit();
 }
-else{
-    print_r($appointmentDetails);
-}
+// else{
+//     print_r($appointmentDetails);
+// }
 
 $userId= $appointmentDetails['userId'];
 // $userId= $_SESSION['userId'];
@@ -90,24 +91,41 @@ $status= "Pending";
 $fee= 200;
 
 //to generate token...
-$sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId';";
-$resultSet = mysqli_query($conn, $sql);
-$numRows = mysqli_num_rows($resultSet);
-if($numRows > 0){
-    $token = array();
-    while($rows = mysqli_fetch_assoc($resultSet)){
-        array_push($token, $rows);
-        // array_push($slotsBooked, $rows['timeSlot']); // yesko laagi status <> Cancelled pani garnu parne cha
-    }
-    $count = count($token); // kati ota token cha, 0?, 1?, ...
-    // print_r($token);
-}
+                $timeTable = "SELECT availabilityTime FROM doctor WHERE doctorId = '$doctorId';";
+                    $resultSet = mysqli_query($conn, $timeTable);
+                    $numRows = mysqli_num_rows($resultSet);
+                    if($numRows > 0){
+                      while($row = mysqli_fetch_assoc($resultSet)){
+                        $availabilityTime = $row['availabilityTime'];
+                        }
+                      }
+                    
+                    $token;
+                    $time = getTime($availabilityTime);
+                    $slotsAndToken = getSlots($time); // array of slots:token
+                    if(array_key_exists($timeSlot, $slotsAndToken)){
+                        $token= $slotsAndToken[$timeSlot];
+                    }
 
-// 
+                    
+//to generate token...
+//{{{{{{{ $sql= "SELECT * FROM appointment WHERE date ='$date' AND doctorId = '$doctorId';";
+// $resultSet = mysqli_query($conn, $sql);
+// $numRows = mysqli_num_rows($resultSet);
+// if($numRows > 0){
+//     $token = array();
+//     while($rows = mysqli_fetch_assoc($resultSet)){
+//         array_push($token, $rows);
+//         // array_push($slotsBooked, $rows['timeSlot']); // yesko laagi status <> Cancelled pani garnu parne cha
+//     }
+//     $count = count($token); // kati ota token cha, 0?, 1?, ...
+//     // print_r($token);
+// }
+// }}}}}}}
 
 // if($count > 0){
-    ++$count; //++count garera insert garnu paryo, 0 ota raicha bhane token 1 huncha, 1ta cha bhane arko ko 2
-    $sql = "INSERT INTO appointment (userId, doctorId, reason, date, timeSlot, token, fee, status) VALUES ('$userId', '$doctorId', '$reason', '$date', '$timeSlot', '$count', '$fee', '$status');";
+    //++$count; ++count garera insert garnu paryo, 0 ota raicha bhane token 1 huncha, 1ta cha bhane arko ko 2
+    $sql = "INSERT INTO appointment (userId, doctorId, reason, date, timeSlot, token, fee, status) VALUES ('$userId', '$doctorId', '$reason', '$date', '$timeSlot', '$token', '$fee', '$status');";
 // }
 // else {
 //     $sql = "INSERT INTO appointment (userId, doctorId, reason, DateAndTime, fee) VALUES ('$userId', '$doctorId', '$reason', '$dateAndTime', '$fee');";
@@ -125,6 +143,8 @@ if($numRows > 0){
 $resultSet= mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows > 0){
-    echo " Successfully Inserted Into appointment";
+    echo '<script> alert("Your request has been submitted "); document.location="../views/dashboard.php"</script>';
+
+    // header("Location: ../views/dashboard.php");
 }
 ?>

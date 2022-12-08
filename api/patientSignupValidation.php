@@ -4,6 +4,7 @@ include(dirname(__DIR__).'/constants/db.php');
 include(dirname(__DIR__).'/constants/enums.php');
 include(dirname(__DIR__).'/constants/regex.php');
 include(dirname(__DIR__).'/constants/validation.php');
+session_start();
 
 $errors = array();
 
@@ -37,7 +38,7 @@ function toLowerCase($values)
     return $lowerCasedData;
 }
 
-$patientsDetails = toLowerCase(trimData($patientDetails));
+$patientDetails = toLowerCase(trimData($patientDetails));
 
 function isAlpha($value)
 {
@@ -87,16 +88,16 @@ function isPasswordValid($value)
 
 // validations
 
-// $isFullNameValid = isFullNameValid($patientsDetails['firstName'], $patientsDetails['middleName'], $patientsDetails['lastName']);
+// $isFullNameValid = isFullNameValid($patientDetails['firstName'], $patientDetails['middleName'], $patientDetails['lastName']);
 $isFirstNameValid = isAlpha($patientDetails['firstName']);
 $isMiddleNameValid = isAlpha($patientDetails['middleName']);
 $isLastNameValid = isAlpha($patientDetails['lastName']);
-$isEmailValid = isEmailValid($patientsDetails['email']);
-$isDOBValid = isDOBValid($patientsDetails['dob']);
-$isGenderValid = in_array($patientsDetails['gender'], $gender);
-$isBloodGroupValid = in_array($patientsDetails['bloodGroup'], $bloodGroup);
-$isMaritalStatusValid = in_array($patientsDetails['maritalStatus'], $maritalStatus);
-$isPasswordValid = isPasswordValid($patientsDetails['password']);
+$isEmailValid = isEmailValid($patientDetails['email']);
+$isDOBValid = isDOBValid($patientDetails['dob']);
+$isGenderValid = in_array($patientDetails['gender'], $gender);
+$isBloodGroupValid = in_array($patientDetails['bloodGroup'], $bloodGroup);
+$isMaritalStatusValid = in_array($patientDetails['maritalStatus'], $maritalStatus);
+$isPasswordValid = isPasswordValid($patientDetails['password']);
 // $isEmailUnique = isEmailUnique();
 
 if (!$isFirstNameValid) {
@@ -123,7 +124,7 @@ if (!$isEmailValid) {
 //     array_push($errors, $errorMessages['repeatedEmail']);
 // }
 
-$email = $patientsDetails['email'];
+$email = $patientDetails['email'];
 $query = "SELECT email FROM user WHERE email= '$email';";
 $resultSet = mysqli_query($conn, $query);
 $emailExists = mysqli_num_rows($resultSet);
@@ -160,8 +161,13 @@ if (!$isPasswordValid) {
 
 }
 
+    if(count($errors)>0){
+        $data = json_encode(["errors"=>$errors]);
+    
+        header('Content-Type: application/json; charset=utf-8');
+        echo $data;
+    }else{
+        $_SESSION['patientDetails']= $patientDetails;
+        header('Location: ../auth/patientSignup.php');
+    }
 
-    $data = json_encode(["errors"=>$errors]);
-
-    header('Content-Type: application/json; charset=utf-8');
-    echo $data;

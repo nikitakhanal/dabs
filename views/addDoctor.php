@@ -1,17 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor</title>
+</head>
+<body>
+    
+</body>
+</html>
+
 <?php
 include(dirname(__DIR__).'/includes/connection.php');
+// include(dirname(__DIR__) . "/includes/header.php");
+include('../includes/header.php');
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Doctor's Appoint Booking Management System</title>
 	<link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300,500,700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="signup">
-				<form action="../admin/addDoctor.php" method="POST">
+<body> -->
+
+
+    <div class="wrapper signup">
+				<form action="../dabs/admin/addDoctor.php" method="POST" class="signupForm">
 					<label class="signupTitle" for="chk" aria-hidden="true">Add New Doctor</label>
 
 					<div class="fields multiStepForm">
@@ -89,8 +106,13 @@ include(dirname(__DIR__).'/includes/connection.php');
                             <br/>
                             <br/>
 
+                            <label for="nmcNo">NMC No</label>
+                            <input type="text" id="nmcNo" name="nmcNo" placeholder="2525" required>
+                            <br/>
+                            <br/>
+
                             <label for="availabilityTime">Available Time</label>
-                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="" required>
+                            <input type="text" id="availabilityTime" name="availabilityTime" placeholder="11:00-19:00" required>
                         </div>
 
                         <div data-step="four">

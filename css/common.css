@@ -38,10 +38,14 @@ input,
 select {
   width: 100%;
   padding: 0.5rem;
-  border: none;
+  border: 3px solid white;
   border-radius: 0.25rem;
   background-color: var(--white);
 }
+
+/* input[type="date"],select{
+  border: 3px solid white;
+} */
 
 label {
   display: block;
@@ -63,4 +67,14 @@ table {
   border-spacing: 15px;
   display: inline;
   text-align: center;
+  border-collapse: collapse;
 }
+
+th, td{
+  padding: 5px;
+}
+
+tr:nth-child(even){
+  background-color: #f7dadd;
+}
+

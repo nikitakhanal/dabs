@@ -14,6 +14,20 @@ if(!isset($_SESSION['role'])){
 }
 ?>
 
+<!-- <?php 
+  // $_SESSION["firstName"] = $_POST["firstName"];
+  // $_SESSION["middleName"] = $_POST["middleName"];
+  // $_SESSION["lastName"] = $_POST["lastName"];
+  // $_SESSION["gender"] = $_POST["gender"];
+  // $_SESSION["dob"] = $_POST["dob"];
+  // $_SESSION["bloodGroup"] = $_POST["bloodGroup"];
+  // $_SESSION["maritalStatus"] = $_POST["maritalStatus"];
+  // $_SESSION["email"] = $_POST["email"];
+  // $_SESSION["password"] = $_POST["password"];
+  // $_SESSION["address"] = $_POST["address"];
+  // $_SESSION["telephone"] = $_POST["telephone"];
+?> -->
+
 <?php
 $specialityQuery = "SELECT DISTINCT specialization FROM doctor";
 $resultSet = mysqli_query($conn, $specialityQuery);
@@ -31,28 +45,28 @@ if ($numRows > 0) {
 
 </head>
 
-<body>
+<body class="dashboard">
 
   <nav>
-    <a href="../logout.php">Log Out</a>
-    <a href="#profile">Profile</a>
-    <a href="#contact">Contact</a>
+    <a class="active" href="../dabs/index.php">Home</a>
     <a href="#about">About</a>
-    <a class="active" href="../index.php">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#profile">Profile</a>
+    <a href="../dabs/logout.php">Log Out</a>
   </nav>
 
   
   <!-- displaying dashboard as Nikita's Dashboard -->
-  <h1><?php echo $_SESSION['firstName'] . "'s";?> Dashboard</h1>
+  <h1 class="patientName"><?php echo $_SESSION['firstName'] . "'s";?> Dashboard</h1>
 
 
   <!-- creating tabs, one to view old appointments and other to book new -->
   <div class="tabs">
-    <div class="tab-2">
+    <!-- <div class="tab-2"> -->
+      <input class="tabsRadio" id="tab2-1" name="tabs-two" type="radio" checked="checked">
       <label for="tab2-1" class="tabLabel">Appointments</label>
-      <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-      <div id="bookedAppointments">
-        <h4>Appointments you've booked</h4>
+      <div id="bookedAppointments" class="tabContent">
+      <h4>Appointments you've booked</h4>
 
         <?php
           $userId = $_SESSION['userId']; // taking current user's id
@@ -153,20 +167,26 @@ if ($numRows > 0) {
         echo "<td>".  $appointments[$i]['status']; 
         echo "</td>";
         echo "<td>
-                 <form action=\"../auth/cancelAppointment.php\">
+                 <form action=\"../dabs/auth/cancelAppointment.php\">
                 <input type='hidden' name='appointmentId' value='$appointmentId' >";
                 if($appointmentStatus == "Cancelled" || $appointmentStatus == "Declined"){
-                  echo "<button type='submit' name='cancelRequest' style='color:#000;' disabled>Cancel</button>";
+                  // echo "<button type='submit' name='cancelRequest' style='color:#000;' disabled>Cancel</button>";
+                  echo "<input type='submit' name='cancelRequest' value='Cancel' disabled>";
                 }else if($appointmentStatus == "Approved" || $appointmentStatus == "Pending"){
-                  echo "<button type='submit' name='cancelRequest' style='color:#000;'>Cancel</button>";
+                  // echo "<button type='submit' name='cancelRequest' style='color:#000;'>Cancel</button>";
+                  echo "<input type='submit' name='cancelRequest' value='Cancel'>";
                 }
         echo    "</form>
               </td>";
               echo "<td>
-              <form action=\"download.php\">
+              <form action=\"views/download.php\">
               <input type='hidden' name='appointmentId' value='$appointmentId' >
-              <input type='hidden' name='userId' value='$userId' >
-              <input type='submit' name='download' value='Download' >";
+              <input type='hidden' name='userId' value='$userId' >";
+              if($appointmentStatus != "Approved"){
+               echo "<input type='submit' name='download' value='Download' disabled>";
+              } else{
+                echo "<input type='submit' name='download' value='Download'>"; 
+              }
               
               echo    "</form>
               </td>";
@@ -177,14 +197,16 @@ if ($numRows > 0) {
 // exit();
 ?>
       </div>
-    </div>
+    <!-- </div> -->
     
-    <div class="tab-2">
+    <!-- <div class="tab-2"> -->
+      <input class="tabsRadio" id="tab2-2" name="tabs-two" type="radio">
       <label for="tab2-2" class="tabLabel">New</label>
-      <input id="tab2-2" name="tabs-two" type="radio">
-      <div>
+      
+      <div id="bookNew" class="tabContent">
         <h4>Book a new appointment</h4>
-        <form action="../auth/createAppointment.php" method="POST">
+        
+        <form action="../dabs/auth/createAppointment.php" method="POST">
           <input type="hidden" name="userId" value="<?php echo $_SESSION['userId'];?>">
           <div class="appointmentFormFields">
             <div class="doctorDetails">
@@ -230,16 +252,16 @@ if ($numRows > 0) {
             </div>
 
 
-            <div class="formField">
-              <label for="reason">Reason</label>
+            <div class="formFieldReason">
+              <label for="reason" id="reasonLabel">Reason</label>
               <textarea disabled name="reason" id="reason" cols="30" rows="10"></textarea>
             </div>
           </div>
 
-          <input type="submit" name="appointmentDetails" value="Get Appointment">
+          <input style="width: 50vw;" type="submit" name="appointmentDetails" value="Get Appointment">
         </form>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
   <!-- </form> -->
 

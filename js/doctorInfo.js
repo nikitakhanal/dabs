@@ -82,7 +82,7 @@ dateElement.addEventListener("change", e =>
 
     // const defaultOption = document.querySelector("#doctor option");
     // doctorSelectionElement.removeChild(defaultOption);
-
+    doctorSelectionElement.innerHTML="";
     doctors.forEach((doctor) => {
       const { doctorId, firstName, middleName, lastName } = doctor;
 
@@ -103,7 +103,7 @@ dateElement.addEventListener("change", e =>
     }
 
     const slotSelectionElement = document.querySelector("#slot");
-
+    slotSelectionElement.innerHTML="";
     // const defaultOption = document.querySelector("#slot option");
     // slotSelectionElement.removeChild(defaultOption);
 
