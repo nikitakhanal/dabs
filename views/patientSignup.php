@@ -77,7 +77,7 @@ include('../includes/header.php');
             <small class="message" data-message=""></small>
 
             <label for="telephone">Telephone</label>
-            <input type="tel" id="telephone" name="telephone" value="telephone" maxlength="10" required />
+            <input type="number" id="telephone" name="telephone" minlength="10" maxlength="10" required />
             <small class="message" data-message=""></small>
           </div>
         </div>
@@ -140,6 +140,11 @@ include('../includes/header.php');
       const {
         errors
       } = responseData; // destructuring "errors" JSON response from the server
+
+      if(errors === undefined){
+        alert("Patient successfully added to the database.");
+        return;
+      }
 
       // show error message underneath the respective field
       for (const key in errors) {

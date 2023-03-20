@@ -138,6 +138,10 @@ if (!$isDOBValid) {
     $errors["dob"] = "DOB " . $errorMessages['invalidDate']. " yyyy-mm-dd!";
 }
 
+if(new DateTime($patientDetails['dob']) > new DateTime()){
+    $errors["dob"] = "DOB " . "cannot be in the future!";
+}
+
 if (!$isGenderValid) {
     // array_push($errors, array("gender" => "Gender " . $errorMessages['notInEnum']));
     $errors["gender"] = "Gender " . $errorMessages['notInEnum'];

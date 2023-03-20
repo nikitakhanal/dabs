@@ -20,12 +20,12 @@ include (dirname(__DIR__).'/includes/adminAuthentication.php');
 
 <h1 class="patientName">Admin's Dashboard</h1>
 
-<div class="search">
+<!-- <div class="search">
   <form action="views/searchResult.php" method="GET">
       <input class="searchField" type="text" name="search" placeholder="search"/>
       <input class="searchFieldLabel" type="submit" value="search" name="submit" />
   </form>
-</div>
+</div> -->
 
 <h2 class="tableTitle">Appointments</h2>
     <table>

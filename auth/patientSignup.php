@@ -9,22 +9,22 @@ session_start();
 
 
 // Run using insert queries 
-$patientsDetails = $_SESSION['patientDetails'];
-// print_r($patientsDetails);
+$patientDetails = $_SESSION['patientDetails'];
+// print_r($patientDetails);
 // exit();
 
-$firstName= $patientsDetails['firstName'];
-$middleName= $patientsDetails['middleName'];
-$lastName= $patientsDetails['lastName'];
-$dob= $patientsDetails['dob'];
-$email= $patientsDetails['email'];
-$gender= $patientsDetails['gender'];
-$maritalStatus = $patientsDetails['maritalStatus'];
-$bloodGroup= $patientsDetails['bloodGroup'];
-$password= $patientsDetails['password'];
+$firstName= $patientDetails['firstName'];
+$middleName= $patientDetails['middleName'];
+$lastName= $patientDetails['lastName'];
+$dob= $patientDetails['dob'];
+$email= $patientDetails['email'];
+$gender= $patientDetails['gender'];
+$maritalStatus = $patientDetails['maritalStatus'];
+$bloodGroup= $patientDetails['bloodGroup'];
+$password= $patientDetails['password'];
 $hashedPassword = md5($password);
-$address = $patientsDetails['address'];
-$phone = $patientsDetails['telephone'];
+$address = $patientDetails['address'];
+$phone = $patientDetails['telephone'];
 $role= "patient";
 $photo= $defaultValues['photo'].$firstName."+".$lastName;
 
