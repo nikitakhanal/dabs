@@ -29,7 +29,7 @@
 
 .cover-img {
   position: relative;
-  width: 700px;
+  width: 600px;
   height: auto;
   object-fit: cover;
   border-radius: 0.5rem;
@@ -37,7 +37,7 @@
 
 .cover-img-container {
   position: relative;
-  width: 700px;
+  width: 600px;
   min-height: 300px;
 }
 

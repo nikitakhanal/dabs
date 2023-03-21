@@ -3,6 +3,7 @@
     flex-direction: column;
     box-sizing: border-box;
     height: 100vh;
+    min-height: 600px;
 }
 
 nav{
@@ -51,8 +52,9 @@ nav a:hover:after{
     text-transform: capitalize;
     color: var(--brand-300);
     /* padding: 10px 5px; */
-    padding-top: 5px;
-    padding-left: 5px;
+    /* padding-top: 5px;
+    padding-left: 5px; */
+    padding: 3rem;
 }
 
 
@@ -60,10 +62,11 @@ nav a:hover:after{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding: 2rem;
     /* max-width: 1200px; */
-    height: auto;
+    /* height: auto; */
     /* background-color: aqua; */
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .tabLabel{
@@ -73,6 +76,7 @@ nav a:hover:after{
     text-align: center;
     /* border-bottom: 3px solid var(--brand-400); */
     color: var(--brand-500);
+    font-weight: bold;
     /* background-color: #f5d7d9; */
 }
 
@@ -82,11 +86,11 @@ nav a:hover:after{
 
 .tabContent{
     order: 1;
+    text-align: center;
     width: 100%;
     /* border-bottom: 10px solid var(--brand-500); */
     display: none;
     justify-content: center;
-    text-align: center;
     align-items: center;
     /* overflow: auto; */
 }
@@ -116,12 +120,13 @@ nav a:hover:after{
 .appointmentFormFields {
     display: flex;
     gap: 2rem;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-end;
     /* background-color: aquamarine; */
-    margin-top: 0;
+    /* margin-top: 0;
     margin-left: 15vw;
-    margin-right: 10vw;
+    margin-right: 10vw; */
+    margin: 0 auto;
     padding: 20px;
 }
   
@@ -129,17 +134,25 @@ nav a:hover:after{
     width: 100%;
 }
 
-/* .formFieldReason{
-    margin-top: 8rem;
-} */
-
-#reasonLabel{
-    padding-left: 30px;
-    margin-left: 30px;
-}
-  
 .doctorDetails .formField {
     margin-top: 1rem;
+ }
+
+ .formField input, .formField select, .formFieldReason textarea{
+    /* box-shadow: 0px 0px 20px -15px var(--brand-600); */
+    box-shadow: 0px 0px 20px -15px black;
+ }
+
+ .formFieldReason label{
+    margin-left: 0;
+    margin-right: 0;
+    margin-right: 0;
+    padding: 0;
+ }
+ .formFieldReason textarea{
+    border-radius: .5rem;
+    height: 48vh;
+    width: 30vw;;
  }
 
  button[type="submit"], input[type="submit"]{
@@ -206,4 +219,8 @@ nav a:hover:after{
     padding-left: 5px;
     margin: 2rem;
     font-size: xx-large;
+}
+
+#bookedAppointments table{
+    margin-top: 5rem;
 }

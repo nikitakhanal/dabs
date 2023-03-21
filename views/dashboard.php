@@ -258,7 +258,7 @@ if ($numRows > 0) {
             </div>
           </div>
 
-          <input style="width: 50vw;" type="submit" name="appointmentDetails" value="Get Appointment">
+          <input class="cta" style="width: 50vw;" type="submit" name="appointmentDetails" value="Get Appointment">
         </form>
       </div>
     <!-- </div> -->
