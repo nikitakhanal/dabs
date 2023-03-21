@@ -15,7 +15,6 @@ include('./includes/header.php');
       <a href="views/signin.php" class="CTA">Sign in</a>
     </div>
     <div class="cover-img-container">
-      <!-- <img class="cover-img" src="http://koshihospital.gov.np/wp-content/uploads/2020/04/koshi-hospital-covid-19-special-hospital.jpg" alt="Koshi Zonal Hospital - New Department"> -->
       <img class="cover-img" src="images/koshi1.jpg" alt="Koshi Zonal Hospital">
   </div>
   </section>

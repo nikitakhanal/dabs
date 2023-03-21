@@ -36,11 +36,25 @@ $resultSet= mysqli_query($conn, $sql);
 $affectedRows= mysqli_affected_rows($conn);
 if($affectedRows>0){
     // echo "Successfully Inserted";
-    $userDetails = ["firstName" => $firstName, "email" => $email, "role" => $role];
-    $_SESSION['userDetails']= $userDetails;
-    $data = json_encode($userDetails);
+    // $userDetails = ["firstName" => $firstName, "email" => $email, "role" => $role];
+    // $_SESSION['userDetails']= $userDetails;
+    $_SESSION['role']= $role;
+
+    $sql1 = "SELECT * FROM user WHERE email='$email';";
+    $resultSet= mysqli_query($conn, $sql1);
+    $numRows= mysqli_num_rows($resultSet);
+        if($numRows>0){
+            $row = mysqli_fetch_assoc($resultSet);
+            $_SESSION['userId']= $row['userId'];
+        }
+
+    // $data = json_encode(["userDetails"=>$userDetails]);
     
-    header('Content-Type: application/json; charset=utf-8');
-    echo $data;
+    header("HTTP/1.1 201 CREATED");
+    // header('Content-Type: application/json; charset=utf-8');
+    // echo $data;
+
+    exit();
+
 }
 mysqli_close($conn);

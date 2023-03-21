@@ -136,15 +136,14 @@ include('../includes/header.php');
         },
         body: JSON.stringify(data)
       });
+      if(res.status === 201){
+        document.location.href= "http://localhost/DABS/views/dashboard.php";
+        return;
+      }
       const responseData = await res.json();
       const {
         errors
       } = responseData; // destructuring "errors" JSON response from the server
-
-      if(errors === undefined){
-        alert("Patient successfully added to the database.");
-        return;
-      }
 
       // show error message underneath the respective field
       for (const key in errors) {
@@ -163,6 +162,8 @@ include('../includes/header.php');
         }
       }
       
+
+
     })
   </script>
 </body>
